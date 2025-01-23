@@ -31,5 +31,7 @@ selectionFilter = "'" + "+".join(selectionsList) + "'"
 vfilter = "-vf \"select=" + selectionFilter + ",setpts=N/FRAME_RATE/TB\""
 afilter = "-af \"aselect=" + selectionFilter + ",asetpts=N/SR/TB\""
 
+outfile = inputFile.rsplit("/", 1)
+outfile = (outfile[0] + "/" if len(outfile) > 1 else "") + "outfile_" + outfile[-1]
 # output ffmpeg command
-print("ffmpeg -i", inputFile, vfilter, afilter, "outfile_" + inputFile)
+print("ffmpeg -i", inputFile, vfilter, afilter, outfile)
